@@ -1,7 +1,6 @@
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -9,16 +8,13 @@ import {
   Button,
   Input,
   useDisclosure,
-  MenuItem,
   ListItem,
   Heading,
   Icon,
-  Textarea,
   Text,
   VStack,
   HStack,
   InputGroup,
-  Center,
 } from "@chakra-ui/react";
 import { AiFillPhone, AiOutlineMail } from "react-icons/ai";
 import { TiLocation } from "react-icons/ti";
@@ -143,6 +139,7 @@ const Contact = () => {
                 colorScheme={"orange"}
                 fontFamily={"Roboto"}
                 _hover={{ transform: "scale(1.1)" }}
+                rightIcon={<AiOutlineMail />}
               >
                 Enviar
               </Button>

@@ -13,48 +13,97 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Img,
+  HStack,
 } from "@chakra-ui/react";
 import { AiFillCalculator } from "react-icons/ai";
-
+import bg from "../../assets/images/services.png";
+import money from "../../assets/images/money.png";
 import NavBar from "../../components/NavBar";
 import { motion } from "framer-motion";
 import { useState } from "react";
 const Services = () => {
   const [price, setPrice] = useState({
-    from: "11",
-    to: "16",
+    from: 11,
+    to: 16,
     time: 5,
     price: 0,
     promoPrice: 0,
-    plan: "Fale Mais 30",
+    plan: 30,
   });
-  const diff = Number(price.from);
+
   const [show, setShow] = useState(false);
   const handlePrice = () => {
-    const origem = price.from;
-    const destino = price.to;
+    const from = price.from;
+    const to = price.to;
     setShow(true);
+    const promoTime =
+      price.time - price.plan <= 0 ? 0 : price.time - price.plan;
+    console.log(promoTime);
 
-    if (
-      (origem === "11" && destino === "16") ||
-      (origem === "18" && destino === "11")
-    ) {
-      setPrice({ ...price, price: price.time * 1.9 });
+    if ((from === 11 && to === 16) || (from === 18 && to === 11)) {
+      if (promoTime === 0) {
+        setPrice({ ...price, price: price.time * 1.9, promoPrice: 0 });
+      } else {
+        setPrice({
+          ...price,
+          price: price.time * 1.9,
+          promoPrice: promoTime * 1.9 * 1.1,
+        });
+      }
     }
-    if (origem === "16" && destino === "11") {
-      setPrice({ ...price, price: price.time * 2.9 });
+
+    if (from === 16 && to === 11) {
+      if (promoTime === 0) {
+        setPrice({ ...price, price: price.time * 2.9, promoPrice: 0 });
+      } else {
+        setPrice({
+          ...price,
+          price: price.time * 2.9,
+          promoPrice: promoTime * 2.9 * 1.1,
+        });
+      }
     }
-    if (origem === "11" && destino === "17") {
-      setPrice({ ...price, price: price.time * 1.7 });
+    if (from === 11 && to === 17) {
+      if (promoTime === 0) {
+        setPrice({ ...price, price: price.time * 1.7, promoPrice: 0 });
+      } else {
+        setPrice({
+          ...price,
+          price: price.time * 1.7,
+          promoPrice: promoTime * 1.7 * 1.1,
+        });
+      }
     }
-    if (origem === "17" && destino === "11") {
-      setPrice({ ...price, price: price.time * 2.7 });
+    if (from === 17 && to === 11) {
+      if (promoTime === 0) {
+        setPrice({ ...price, price: price.time * 2.7, promoPrice: 0 });
+      } else {
+        setPrice({
+          ...price,
+          price: price.time * 2.7,
+          promoPrice: promoTime * 2.7 * 1.1,
+        });
+      }
     }
-    if (origem === "11" && destino === "18") {
-      setPrice({ ...price, price: price.time * 0.9 });
+    if (from === 11 && to === 18) {
+      if (promoTime === 0) {
+        setPrice({ ...price, price: price.time * 0.9, promoPrice: 0 });
+      } else {
+        setPrice({
+          ...price,
+          price: price.time * 0.9,
+          promoPrice: promoTime * 0.9 * 1.1,
+        });
+      }
     }
   };
-
+  const formatMoney = (value) => {
+    return value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  };
   return (
     <motion.div
       initial={{ opacity: 0.2 }}
@@ -62,22 +111,37 @@ const Services = () => {
       transition={{ duration: 1 }}
       exit={{ opacity: 0 }}
     >
-      <VStack spacing={0} w={"100vw"} h={"100vh"}>
+      <VStack spacing={0} w={"100%"} h={"100%"}>
         <NavBar />
 
-        <VStack borderBottom={"2px solid orange"} w={"100%"} p={4}>
-          <Heading fontFamily={"Roboto"}>
-            Já conhece o serviço Fale mais?
+        <VStack w={"100%"} p={4} bgColor={"orange.100"}>
+          <Heading fontFamily={"Roboto"} textAlign={"center"}>
+            Já conhece o serviço Fale Mais?
           </Heading>
-          <Text fontFamily={"Roboto"}>
+          <Text
+            fontFamily={"Roboto"}
+            textAlign={"center"}
+            fontSize={("md", "xl")}
+          >
             Nosso mais novo serviço para chamadas de longa distância nacional,
             com ele você fala mais pagando menos.
           </Text>
-          <Text>Faça uma comparação de preços abaixo.</Text>
+          <Text
+            fontFamily={"Roboto"}
+            textAlign={"center"}
+            fontSize={("md", "xl")}
+          >
+            Faça uma comparação de preços abaixo.
+          </Text>
+          <Img
+            src={bg}
+            w={"400px"}
+            _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
+          />
         </VStack>
-        <VStack>
+        <VStack p={4} w={"100%"}>
           <TableContainer>
-            <Table variant="striped">
+            <Table size={"sm"}>
               <TableCaption>
                 Calcule e veja as vantagens do plano Fale Mais
               </TableCaption>
@@ -91,12 +155,12 @@ const Services = () => {
               </Thead>
               <Tbody>
                 <Tr>
-                  <Td>
+                  <Td w={"85px"}>
                     <Select
                       variant={"flushed"}
                       borderRadius={"0px"}
                       onChange={(e) =>
-                        setPrice({ ...price, from: e.target.value })
+                        setPrice({ ...price, from: Number(e.target.value) })
                       }
                     >
                       <option value={11}>11</option>
@@ -105,25 +169,28 @@ const Services = () => {
                       <option value={18}>18</option>
                     </Select>
                   </Td>
-                  <Td>
+                  <Td w={"85px"}>
                     <Select
                       borderRadius={"0px"}
                       variant={"flushed"}
                       onChange={(e) =>
-                        setPrice({ ...price, to: e.target.value })
+                        setPrice({ ...price, to: Number(e.target.value) })
                       }
                     >
-                      <option value={11} disabled={diff === 11 ? true : false}>
+                      <option
+                        value={11}
+                        disabled={price.from === 11 ? true : false}
+                      >
                         11
                       </option>
                       <option
                         value={16}
                         disabled={
-                          diff === 16
+                          price.from === 16
                             ? true
-                            : diff === 17
+                            : price.from === 17
                             ? true
-                            : diff === 18
+                            : price.from === 18
                             ? true
                             : false
                         }
@@ -133,11 +200,11 @@ const Services = () => {
                       <option
                         value={17}
                         disabled={
-                          diff === 17
+                          price.from === 17
                             ? true
-                            : diff === 18
+                            : price.from === 18
                             ? true
-                            : diff === 16
+                            : price.from === 16
                             ? true
                             : false
                         }
@@ -147,11 +214,11 @@ const Services = () => {
                       <option
                         value={18}
                         disabled={
-                          diff === 18
+                          price.from === 18
                             ? true
-                            : diff === 17
+                            : price.from === 17
                             ? true
-                            : diff === 16
+                            : price.from === 16
                             ? true
                             : false
                         }
@@ -160,48 +227,34 @@ const Services = () => {
                       </option>
                     </Select>
                   </Td>
-                  <Td>
+                  <Td w={"80px"}>
                     <Input
-                      value={price.time}
+                      value={Number(price.time)}
                       variant={"flushed"}
                       type={"number"}
                       onChange={(e) =>
-                        setPrice({ ...price, time: e.target.value })
+                        setPrice({ ...price, time: Number(e.target.value) })
                       }
                     />
                   </Td>
                   <Td>
                     <Select
+                      value={Number(price.plan)}
                       variant={"flushed"}
                       borderRadius={"0px"}
                       onChange={(e) =>
-                        setPrice({ ...price, from: e.target.value })
+                        setPrice({ ...price, plan: Number(e.target.value) })
                       }
                     >
-                      <option value={"Fale mais 30"}>Fale mais 30</option>
-                      <option value={"Fale mais 60"}>Fale mais 60</option>
-                      <option value={"Fale mais 120"}>Fale mais 120</option>
+                      <option value={"30"}>Fale mais 30</option>
+                      <option value={"60"}>Fale mais 60</option>
+                      <option value={"120"}>Fale mais 120</option>
                     </Select>
                   </Td>
                 </Tr>
-                {show && (
-                  <>
-                    <Tr>
-                      <Th>Preço sem plano</Th>
-                      <Th>Preço com o plano</Th>
-                      <Th>Total economizado</Th>
-                      <Th>Plano escolhido</Th>
-                    </Tr>
-                    <Td>{price.price}</Td>
-                    <Td>{price.promoPrice}</Td>
-                    <Td>{price.price - price.promoPrice}</Td>
-                    <Td>{price.plan}</Td>
-                  </>
-                )}
               </Tbody>
             </Table>
           </TableContainer>
-
           <Button
             onClick={handlePrice}
             colorScheme={"orange"}
@@ -215,6 +268,33 @@ const Services = () => {
           >
             Calcular preço
           </Button>
+          {show && (
+            <HStack
+              p={4}
+              fontSize={["md", "xl"]}
+              w={"100%"}
+              justify={"center"}
+              textAlign={"left"}
+              flexDir={["column-reverse", "row"]}
+            >
+              <VStack fontFamily={"Nunito"}>
+                <Text>Preço sem Fale Mais: {formatMoney(price.price)}</Text>
+                <Text>
+                  Preço com Fale Mais: {formatMoney(price.promoPrice)}
+                </Text>
+                <Text>
+                  Dinheiro economizado: {""}
+                  {formatMoney(price.price - price.promoPrice)}
+                </Text>
+              </VStack>
+
+              <Img
+                src={money}
+                w={["150px", "200px"]}
+                _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
+              />
+            </HStack>
+          )}
         </VStack>
       </VStack>
     </motion.div>

@@ -12,18 +12,16 @@ import {
 } from "@chakra-ui/react";
 import Header from "../Header";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/header.png";
 import Contact from "../Contact";
 import { Link } from "react-router-dom";
 
 const NavBar = () => {
-  const navigate = useNavigate();
   return (
     <>
       <Header />
       <HStack
-        w={"100vw"}
+        w={"100%"}
         h={"120px"}
         minH={"120px"}
         bgColor={"blackAlpha.800"}
