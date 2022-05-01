@@ -17,6 +17,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { AiFillCalculator } from "react-icons/ai";
+
 import bg from "../../assets/images/services.png";
 import money from "../../assets/images/money.png";
 import NavBar from "../../components/NavBar";

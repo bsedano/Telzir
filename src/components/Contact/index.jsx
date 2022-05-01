@@ -76,6 +76,7 @@ const Contact = () => {
               h={"70%"}
               justify={"space-evenly"}
               p={6}
+              as={"form"}
               border={"2px solid orange"}
             >
               <InputGroup>
@@ -129,6 +130,7 @@ const Contact = () => {
                 />
               </InputGroup>
               <Button
+                type={"submit"}
                 minH={"35px"}
                 margin={"0 auto"}
                 onClick={onClose}
