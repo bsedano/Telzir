@@ -32,14 +32,11 @@ const Services = () => {
     plan: 30,
   });
 
-  const [show, setShow] = useState(false);
   const handlePrice = () => {
     const from = price.from;
     const to = price.to;
-    setShow(true);
     const promoTime =
       price.time - price.plan <= 0 ? 0 : price.time - price.plan;
-    console.log(promoTime);
 
     if ((from === 11 && to === 16) || (from === 18 && to === 11)) {
       if (promoTime === 0) {
@@ -246,9 +243,9 @@ const Services = () => {
                         setPrice({ ...price, plan: Number(e.target.value) })
                       }
                     >
-                      <option value={"30"}>Fale mais 30</option>
-                      <option value={"60"}>Fale mais 60</option>
-                      <option value={"120"}>Fale mais 120</option>
+                      <option value={"30"}>Fale Mais 30</option>
+                      <option value={"60"}>Fale Mais 60</option>
+                      <option value={"120"}>Fale Mais 120</option>
                     </Select>
                   </Td>
                 </Tr>
@@ -263,38 +260,36 @@ const Services = () => {
             w={"250px"}
             maxW={"50%"}
             boxShadow={"0px 0px 10px black"}
-            _hover={{ transform: "scale(1.1)" }}
+            _hover={{ transform: "scale(1.1)", cursor: "pointer" }}
             rightIcon={<AiFillCalculator />}
+            as={"a"}
           >
             Calcular preço
           </Button>
-          {show && (
-            <HStack
-              p={4}
-              fontSize={["md", "xl"]}
-              w={"100%"}
-              justify={"center"}
-              textAlign={"left"}
-              flexDir={["column-reverse", "row"]}
-            >
-              <VStack fontFamily={"Nunito"}>
-                <Text>Preço sem Fale Mais: {formatMoney(price.price)}</Text>
-                <Text>
-                  Preço com Fale Mais: {formatMoney(price.promoPrice)}
-                </Text>
-                <Text>
-                  Dinheiro economizado: {""}
-                  {formatMoney(price.price - price.promoPrice)}
-                </Text>
-              </VStack>
 
-              <Img
-                src={money}
-                w={["150px", "200px"]}
-                _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
-              />
-            </HStack>
-          )}
+          <HStack
+            p={4}
+            fontSize={["md", "xl"]}
+            w={"100%"}
+            justify={"center"}
+            textAlign={"left"}
+            flexDir={["column-reverse", "row"]}
+          >
+            <VStack fontFamily={"Nunito"}>
+              <Text>Preço sem Fale Mais: {formatMoney(price.price)}</Text>
+              <Text>Preço com Fale Mais: {formatMoney(price.promoPrice)}</Text>
+              <Text>
+                Dinheiro economizado: {""}
+                {formatMoney(price.price - price.promoPrice)}
+              </Text>
+            </VStack>
+
+            <Img
+              src={money}
+              w={["150px", "200px"]}
+              _hover={{ cursor: "pointer", transform: "scale(1.1)" }}
+            />
+          </HStack>
         </VStack>
       </VStack>
     </motion.div>

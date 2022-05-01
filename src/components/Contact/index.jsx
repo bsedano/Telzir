@@ -29,7 +29,7 @@ const Contact = () => {
         _hover={{
           color: "orange",
           cursor: "pointer",
-          transform: "scale(1.1)",
+          borderBottom: "2px solid orange",
         }}
       >
         Contato

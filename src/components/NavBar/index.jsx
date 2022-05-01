@@ -15,7 +15,6 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import logo from "../../assets/images/header.png";
 import Contact from "../Contact";
 import { Link } from "react-router-dom";
-
 const NavBar = () => {
   return (
     <>
@@ -103,7 +102,7 @@ const NavBar = () => {
             _hover={{
               color: "orange",
               cursor: "pointer",
-              transform: "scale(1.1)",
+              borderBottom: "2px solid orange",
             }}
           >
             <Link to={"/"}> Home</Link>
@@ -112,7 +111,8 @@ const NavBar = () => {
             _hover={{
               color: "orange",
               cursor: "pointer",
-              transform: "scale(1.1)",
+
+              borderBottom: "2px solid orange",
             }}
           >
             <Link to={"/about-us"}>Sobre Nós</Link>
@@ -121,12 +121,13 @@ const NavBar = () => {
             _hover={{
               color: "orange",
               cursor: "pointer",
-              transform: "scale(1.1)",
+
+              borderBottom: "2px solid orange",
             }}
           >
             <Link to={"/services"}>Serviços</Link>
           </ListItem>
-          <Contact />
+          <Contact _hover={{ borderBottom: "2px solid orange" }} />
         </UnorderedList>
       </HStack>
     </>
